@@ -1,6 +1,6 @@
 /**
  * dat-gui JavaScript Controller Library
- * http://code.google.com/p/dat-gui
+ * https://github.com/dataarts/dat.gui
  *
  * Copyright 2011 Data Arts Team, Google Creative Lab
  *
@@ -1315,13 +1315,13 @@ var ColorController = function (_Controller) {
       }
     });
     dom.bind(_this2.__input, 'blur', onBlur);
-    dom.bind(_this2.__selector, 'mousedown', function ()        {
-      dom.addClass(this, 'drag').bind(window, 'mouseup', function ()        {
+    dom.bind(_this2.__selector, 'mousedown', function () {
+      dom.addClass(this, 'drag').bind(window, 'mouseup', function () {
         dom.removeClass(_this.__selector, 'drag');
       });
     });
-    dom.bind(_this2.__selector, 'touchstart', function ()        {
-      dom.addClass(this, 'drag').bind(window, 'touchend', function ()        {
+    dom.bind(_this2.__selector, 'touchstart', function () {
+      dom.addClass(this, 'drag').bind(window, 'touchend', function () {
         dom.removeClass(_this.__selector, 'drag');
       });
     });
@@ -1692,7 +1692,7 @@ var hideableGuis = [];
 var GUI = function GUI(pars) {
   var _this = this;
   var params = pars || {};
-  this.domElement = document.createElement('div');
+  if (params && params.element) this.domElement = params.element;else this.domElement = document.createElement('div');
   this.__ul = document.createElement('ul');
   this.domElement.appendChild(this.__ul);
   dom.addClass(this.domElement, CSS_NAMESPACE);
@@ -2176,7 +2176,7 @@ function markPresetModified(gui, modified) {
 function augmentController(gui, li, controller) {
   controller.__li = li;
   controller.__gui = gui;
-  Common.extend(controller,                                   {
+  Common.extend(controller, {
     options: function options(_options) {
       if (arguments.length > 1) {
         var nextSibling = controller.__li.nextElementSibling;
